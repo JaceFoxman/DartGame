@@ -13,7 +13,6 @@ Public Class DartGameForm
     Public roundString As String
     Private Sub DartGameForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetDefaults()
-        RoundTrack()
     End Sub
 
     Sub SetDefaults()
@@ -41,12 +40,8 @@ Public Class DartGameForm
         result = MessageBox.Show("Thats 3 Darts, Do you want to start a new round?", "New Round", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
             SetDefaults()
-            RoundTrack()
-
         Else
             SetDefaults()
-            RoundTrack()
-
         End If
     End Sub
 
@@ -59,12 +54,6 @@ Public Class DartGameForm
 
         End If
         Return count    'Return count value
-    End Function
-
-    Function RoundTrack() As Integer
-        Static roundCount As Integer = 0 'Static variable to hold round count value
-        roundCount += 1 'Increase round count    'Return round count value
-        Return roundCount
     End Function
 
     Sub ThrowDart()
@@ -103,24 +92,27 @@ Public Class DartGameForm
         ThrowDart()
         ThrowDart()
     End Sub
+
     Private Sub Clear_Button_Click(sender As Object, e As EventArgs) Handles Clear_Button.Click
         SetDefaults()
-        RoundTrack()
-
     End Sub
     Private Sub TabPage2_Click(sender As Object, e As EventArgs) Handles TabPage2.Click
         SetDefaults()
-
-        RoundTrack()
         ThrowDart_Button.Enabled = False
     End Sub
     Private Sub TabPage1_Click(sender As Object, e As EventArgs) Handles TabPage1.Click
         SetDefaults()
 
-        RoundTrack()
         ThrowDart_Button.Enabled = True
     End Sub
     Private Sub Quit_Button_Click(sender As Object, e As EventArgs) Handles Quit_Button.Click
+        'clear the text file "DartGame.log"
+        Dim path As String = "DartGame.log"
+        FileOpen(1, path, OpenMode.Append)
+        PrintLine(1, $"Game Ended")
+        FileClose(1)
+        'close the form
         Me.Close()
     End Sub
+
 End Class
