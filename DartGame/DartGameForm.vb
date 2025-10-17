@@ -40,6 +40,19 @@ Public Class DartGameForm
         g.Dispose()
     End Sub
 
+    Sub DrawDart2(x%, y%)
+        Dim g As Graphics = ReviewPictureBox.CreateGraphics
+        Dim pen As New Pen(Color.Black)
+        Dim dartWidth% = 30
+
+        g.DrawEllipse(pen, x - (dartWidth \ 2), y - (dartWidth \ 2), dartWidth, dartWidth)
+        g.DrawLine(pen, x - 3, y, x + 3, y)
+        g.DrawLine(pen, x, y - 3, x, y + 3)
+
+        pen.Dispose()
+        g.Dispose()
+    End Sub
+
     Sub AskToStartNewRound()
         Dim result As DialogResult
         result = MessageBox.Show("Thats 3 Darts, Do you want to start a new round?", "New Round", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
@@ -91,6 +104,7 @@ Public Class DartGameForm
         Round += 1 'RoundCountToString()
         roundString = Round.ToString
         RoundLabel.Text = $"Round: {currentRoundToString}"
+
         FileOpen(1, path, OpenMode.Append)
         PrintLine(1, "-------------------")
         WriteLine(1, $"Round: {roundString}")
@@ -111,11 +125,26 @@ Public Class DartGameForm
         ThrowDart_Button.Enabled = True
         SetDefaults()
     End Sub
-    Private Sub TabPage2_Click(sender As Object, e As EventArgs) Handles TabPage2.Click
+
+    Sub ReadLogFile()
+        'read the text file "DartGame.log" and display its contents in a message box
+        Dim path As String = "DartGame.log"
+        Dim fileContents As String
+        If FileIO.FileSystem.FileExists(path) Then
+            fileContents = My.Computer.FileSystem.ReadAllText(path)
+            MessageBox.Show(fileContents, "Dart Game Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show("No records found.", "Dart Game Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+    End Sub
+
+    Private Sub TabPage2_Enter(sender As Object, e As EventArgs)
         SetDefaults()
         ThrowDart_Button.Enabled = False
     End Sub
-    Private Sub TabPage1_Click(sender As Object, e As EventArgs) Handles TabPage1.Click
+    Private Sub TabPage1_Enter(sender As Object, e As EventArgs)
+        ThrowDart_Button.Enabled = True
     End Sub
     Private Sub Quit_Button_Click(sender As Object, e As EventArgs) Handles Quit_Button.Click
         'clear the text file "DartGame.log"
@@ -131,7 +160,8 @@ Public Class DartGameForm
         'clear the text file "DartGame.log"
         'ask user to confirm
         Dim result As DialogResult
-        result = MessageBox.Show("Doing this will clear all previous Round records and close the game, are you sure you want to proceed?", "Yes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        result = MessageBox.Show("Doing this will clear all previous records and close the game." & vbNewLine _
+        & "Are you sure you want to proceed?", "Yes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If result = DialogResult.Yes Then
             Dim path As String = "DartGame.log"
             FileOpen(1, path, OpenMode.Output)
@@ -139,6 +169,34 @@ Public Class DartGameForm
             Me.Close()
         Else
 
+        End If
+
+    End Sub
+
+    Private Sub DisplayRecordsButton_Click(sender As Object, e As EventArgs) Handles DisplayRecordsButton.Click
+        ReadLogFile()
+    End Sub
+
+    Private Sub ReviewBoardButton_Click(sender As Object, e As EventArgs) Handles ReviewBoardButton.Click
+        'grab previous dart positions from log file and redraw them on the drawing area
+        Dim path As String = "DartGame.log"
+        Dim line As String
+        If FileIO.FileSystem.FileExists(path) Then
+            FileOpen(1, path, OpenMode.Input)
+            SetDefaults()
+            Do While Not EOF(1)
+                line = LineInput(1)
+                If line.StartsWith("X Coordinate:") Then
+                    'extract X and Y coordinates
+                    Dim parts() As String = line.Split(" "c)
+                    Dim x As Integer = CInt(parts(2))
+                    Dim y As Integer = CInt(parts(5))
+                    DrawDart2(x, y)
+                End If
+            Loop
+            FileClose(1)
+        Else
+            MessageBox.Show("No records found to review.", "Dart Game Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
 
     End Sub
