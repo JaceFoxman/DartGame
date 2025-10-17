@@ -2,12 +2,11 @@
 'Fall 2025
 'RCET 3371
 'Dart Game
-'
+'https://github.com/JaceFoxman/DartGame.git
 
 Option Strict On
 Option Explicit On
 Option Compare Text
-
 Public Class DartGameForm
     Public Round As Integer
     Public roundString As String
@@ -84,16 +83,14 @@ Public Class DartGameForm
         Dim Y As Integer = GetRandomNumberZeroTo(Drawing_PictureBox.Height)
         DrawDart(X, Y)
 
-
         FileOpen(1, path, OpenMode.Append)
         PrintLine(1, $"X Coordinate: {X}" & $" Y Coordinate: {Y}")
         FileClose(1)
 
         ReviewComboBox.Items.Add($"Round {roundString}: X={X}, Y={Y}")
-
+        ReviewComboBox.Enabled = True
 
         DartTrack()
-
     End Sub
 
     Function GetRandomNumberZeroTo(max%) As Integer
@@ -143,7 +140,6 @@ Public Class DartGameForm
         Else
             MessageBox.Show("No records found.", "Dart Game Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
-
     End Sub
 
     Private Sub TabPage2_Enter(sender As Object, e As EventArgs)
@@ -175,9 +171,7 @@ Public Class DartGameForm
             FileClose(1)
             Me.Close()
         Else
-
         End If
-
     End Sub
 
     Sub ComboBoxDraw()
@@ -196,40 +190,7 @@ Public Class DartGameForm
     End Sub
 
     Private Sub ReviewBoardButton_Click(sender As Object, e As EventArgs) Handles ReviewBoardButton.Click
-
-        Try
-            ComboBoxDraw()
-        Catch ex As Exception
-            MessageBox.Show("Please select a valid dart throw from the list to review.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        End Try
-
-
-
-
-
-
-        'grab previous dart positions from log file and redraw them on the drawing area
-        'Dim path As String = "DartGame.log"
-        'Dim line As String
-
-        'If FileIO.FileSystem.FileExists(path) Then
-        '    FileOpen(1, path, OpenMode.Input)
-        '    SetDefaults()
-        '    Do While Not EOF(1)
-        '            line = LineInput(1)
-        '            If line.StartsWith("X Coordinate:") Then
-        '                'extract X and Y coordinates
-        '                Dim parts() As String = line.Split(" "c)
-        '                Dim x As Integer = CInt(parts(2))
-        '                Dim y As Integer = CInt(parts(5))
-        '            DrawDart2(x, y)
-        '        End If
-        '        Loop
-        '        FileClose(1)
-        'Else
-        '    MessageBox.Show("No records found to review.", "Dart Game Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        'End If
-
+        ComboBoxDraw()
     End Sub
 
     Private Sub ReviewComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ReviewComboBox.SelectedIndexChanged
