@@ -11,7 +11,12 @@ Option Compare Text
 Public Class DartGameForm
     Public Round As Integer
     Public roundString As String
+    Public currentRound As Integer
+    Public currentRoundToString As String
     Private Sub DartGameForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        currentRound += 1
+        currentRoundToString = currentRound.ToString
+        RoundLabel.Text = $"Round: {currentRoundToString}"
         SetDefaults()
     End Sub
 
@@ -41,7 +46,7 @@ Public Class DartGameForm
         If result = DialogResult.Yes Then
             SetDefaults()
         Else
-            SetDefaults()
+            ThrowDart_Button.Enabled = False
         End If
     End Sub
 
@@ -81,9 +86,11 @@ Public Class DartGameForm
 
     Private Sub ThrowDart_Button_Click(sender As Object, e As EventArgs) Handles ThrowDart_Button.Click
         Dim path As String = "DartGame.log"
-
+        currentRound += 1
+        currentRoundToString = currentRound.ToString
         Round += 1 'RoundCountToString()
         roundString = Round.ToString
+        RoundLabel.Text = $"Round: {currentRoundToString}"
         FileOpen(1, path, OpenMode.Append)
         PrintLine(1, "-------------------")
         WriteLine(1, $"Round: {roundString}")
@@ -93,7 +100,15 @@ Public Class DartGameForm
         ThrowDart()
     End Sub
 
+    Private Sub DartGameForm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.Space Then
+            e.SuppressKeyPress = True
+            ThrowDart()
+        End If
+    End Sub
+
     Private Sub Clear_Button_Click(sender As Object, e As EventArgs) Handles Clear_Button.Click
+        ThrowDart_Button.Enabled = True
         SetDefaults()
     End Sub
     Private Sub TabPage2_Click(sender As Object, e As EventArgs) Handles TabPage2.Click
@@ -101,9 +116,6 @@ Public Class DartGameForm
         ThrowDart_Button.Enabled = False
     End Sub
     Private Sub TabPage1_Click(sender As Object, e As EventArgs) Handles TabPage1.Click
-        SetDefaults()
-
-        ThrowDart_Button.Enabled = True
     End Sub
     Private Sub Quit_Button_Click(sender As Object, e As EventArgs) Handles Quit_Button.Click
         'clear the text file "DartGame.log"
@@ -115,4 +127,19 @@ Public Class DartGameForm
         Me.Close()
     End Sub
 
+    Private Sub ClearFileButton_Click(sender As Object, e As EventArgs) Handles ClearFileButton.Click
+        'clear the text file "DartGame.log"
+        'ask user to confirm
+        Dim result As DialogResult
+        result = MessageBox.Show("Doing this will clear all previous Round records and close the game, are you sure you want to proceed?", "Yes", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        If result = DialogResult.Yes Then
+            Dim path As String = "DartGame.log"
+            FileOpen(1, path, OpenMode.Output)
+            FileClose(1)
+            Me.Close()
+        Else
+
+        End If
+
+    End Sub
 End Class

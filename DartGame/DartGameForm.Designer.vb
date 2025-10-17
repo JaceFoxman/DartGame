@@ -28,7 +28,9 @@ Partial Class DartGameForm
         Me.ThrowDart_Button = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.RoundLabel = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.ClearFileButton = New System.Windows.Forms.Button()
         CType(Me.Drawing_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -38,7 +40,7 @@ Partial Class DartGameForm
         '
         Me.Clear_Button.BackColor = System.Drawing.Color.DodgerBlue
         Me.Clear_Button.ForeColor = System.Drawing.Color.Cornsilk
-        Me.Clear_Button.Location = New System.Drawing.Point(571, 424)
+        Me.Clear_Button.Location = New System.Drawing.Point(264, 424)
         Me.Clear_Button.Name = "Clear_Button"
         Me.Clear_Button.Size = New System.Drawing.Size(241, 133)
         Me.Clear_Button.TabIndex = 1
@@ -88,6 +90,8 @@ Partial Class DartGameForm
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.ClearFileButton)
+        Me.TabPage1.Controls.Add(Me.RoundLabel)
         Me.TabPage1.Controls.Add(Me.ThrowDart_Button)
         Me.TabPage1.Controls.Add(Me.Quit_Button)
         Me.TabPage1.Controls.Add(Me.Clear_Button)
@@ -100,6 +104,13 @@ Partial Class DartGameForm
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'RoundLabel
+        '
+        Me.RoundLabel.Location = New System.Drawing.Point(609, 436)
+        Me.RoundLabel.Name = "RoundLabel"
+        Me.RoundLabel.Size = New System.Drawing.Size(100, 40)
+        Me.RoundLabel.TabIndex = 4
+        '
         'TabPage2
         '
         Me.TabPage2.Location = New System.Drawing.Point(4, 32)
@@ -109,6 +120,17 @@ Partial Class DartGameForm
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'ClearFileButton
+        '
+        Me.ClearFileButton.BackColor = System.Drawing.Color.DarkRed
+        Me.ClearFileButton.ForeColor = System.Drawing.Color.Cornsilk
+        Me.ClearFileButton.Location = New System.Drawing.Point(536, 494)
+        Me.ClearFileButton.Name = "ClearFileButton"
+        Me.ClearFileButton.Size = New System.Drawing.Size(241, 52)
+        Me.ClearFileButton.TabIndex = 5
+        Me.ClearFileButton.Text = "Clear Records"
+        Me.ClearFileButton.UseVisualStyleBackColor = False
         '
         'DartGameForm
         '
@@ -132,4 +154,6 @@ Partial Class DartGameForm
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents RoundLabel As Label
+    Friend WithEvents ClearFileButton As Button
 End Class
