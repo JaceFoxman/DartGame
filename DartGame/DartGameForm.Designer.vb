@@ -34,6 +34,7 @@ Partial Class DartGameForm
         Me.ReviewPictureBox = New System.Windows.Forms.PictureBox()
         Me.DisplayRecordsButton = New System.Windows.Forms.Button()
         Me.ReviewBoardButton = New System.Windows.Forms.Button()
+        Me.ReviewComboBox = New System.Windows.Forms.ComboBox()
         CType(Me.Drawing_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -87,9 +88,9 @@ Partial Class DartGameForm
         Me.RoundLabel.BackColor = System.Drawing.SystemColors.ButtonShadow
         Me.RoundLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.RoundLabel.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.RoundLabel.Location = New System.Drawing.Point(607, 437)
+        Me.RoundLabel.Location = New System.Drawing.Point(596, 437)
         Me.RoundLabel.Name = "RoundLabel"
-        Me.RoundLabel.Size = New System.Drawing.Size(87, 34)
+        Me.RoundLabel.Size = New System.Drawing.Size(104, 34)
         Me.RoundLabel.TabIndex = 4
         '
         'ClearFileButton
@@ -131,6 +132,7 @@ Partial Class DartGameForm
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.ReviewComboBox)
         Me.TabPage2.Controls.Add(Me.ReviewBoardButton)
         Me.TabPage2.Controls.Add(Me.ReviewPictureBox)
         Me.TabPage2.Controls.Add(Me.DisplayRecordsButton)
@@ -173,6 +175,14 @@ Partial Class DartGameForm
         Me.ReviewBoardButton.Text = "Review Board"
         Me.ReviewBoardButton.UseVisualStyleBackColor = False
         '
+        'ReviewComboBox
+        '
+        Me.ReviewComboBox.FormattingEnabled = True
+        Me.ReviewComboBox.Location = New System.Drawing.Point(263, 426)
+        Me.ReviewComboBox.Name = "ReviewComboBox"
+        Me.ReviewComboBox.Size = New System.Drawing.Size(258, 28)
+        Me.ReviewComboBox.TabIndex = 5
+        '
         'DartGameForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -202,4 +212,5 @@ Partial Class DartGameForm
     Friend WithEvents ReviewPictureBox As PictureBox
     Friend WithEvents ReviewBoardButton As Button
     Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents ReviewComboBox As ComboBox
 End Class
