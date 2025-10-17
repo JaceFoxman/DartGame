@@ -145,9 +145,11 @@ Public Class DartGameForm
     Private Sub TabPage2_Enter(sender As Object, e As EventArgs)
         SetDefaults()
         ThrowDart_Button.Enabled = False
+        DisplayRecordsButton.Focus()
     End Sub
     Private Sub TabPage1_Enter(sender As Object, e As EventArgs)
         ThrowDart_Button.Enabled = True
+        Clear_Button.Focus()
     End Sub
     Private Sub Quit_Button_Click(sender As Object, e As EventArgs) Handles Quit_Button.Click
         'clear the text file "DartGame.log"

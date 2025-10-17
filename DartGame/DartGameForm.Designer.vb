@@ -22,6 +22,7 @@ Partial Class DartGameForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Clear_Button = New System.Windows.Forms.Button()
         Me.Quit_Button = New System.Windows.Forms.Button()
         Me.Drawing_PictureBox = New System.Windows.Forms.PictureBox()
@@ -31,10 +32,11 @@ Partial Class DartGameForm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.ReviewComboBox = New System.Windows.Forms.ComboBox()
+        Me.ReviewBoardButton = New System.Windows.Forms.Button()
         Me.ReviewPictureBox = New System.Windows.Forms.PictureBox()
         Me.DisplayRecordsButton = New System.Windows.Forms.Button()
-        Me.ReviewBoardButton = New System.Windows.Forms.Button()
-        Me.ReviewComboBox = New System.Windows.Forms.ComboBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.Drawing_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -51,17 +53,19 @@ Partial Class DartGameForm
         Me.Clear_Button.Size = New System.Drawing.Size(241, 133)
         Me.Clear_Button.TabIndex = 1
         Me.Clear_Button.Text = "Clear Board"
+        Me.ToolTip1.SetToolTip(Me.Clear_Button, "Remove all darts from the board and re enable the game")
         Me.Clear_Button.UseVisualStyleBackColor = False
         '
         'Quit_Button
         '
         Me.Quit_Button.BackColor = System.Drawing.Color.DarkRed
         Me.Quit_Button.ForeColor = System.Drawing.Color.Cornsilk
-        Me.Quit_Button.Location = New System.Drawing.Point(807, 424)
+        Me.Quit_Button.Location = New System.Drawing.Point(818, 424)
         Me.Quit_Button.Name = "Quit_Button"
         Me.Quit_Button.Size = New System.Drawing.Size(241, 133)
-        Me.Quit_Button.TabIndex = 2
+        Me.Quit_Button.TabIndex = 3
         Me.Quit_Button.Text = "Quit Game"
+        Me.ToolTip1.SetToolTip(Me.Quit_Button, "Close game")
         Me.Quit_Button.UseVisualStyleBackColor = False
         '
         'Drawing_PictureBox
@@ -81,6 +85,7 @@ Partial Class DartGameForm
         Me.ThrowDart_Button.Size = New System.Drawing.Size(241, 133)
         Me.ThrowDart_Button.TabIndex = 0
         Me.ThrowDart_Button.Text = "Throw Dart"
+        Me.ToolTip1.SetToolTip(Me.ThrowDart_Button, "Throw 3 darts on the board")
         Me.ThrowDart_Button.UseVisualStyleBackColor = False
         '
         'RoundLabel
@@ -92,6 +97,7 @@ Partial Class DartGameForm
         Me.RoundLabel.Name = "RoundLabel"
         Me.RoundLabel.Size = New System.Drawing.Size(104, 34)
         Me.RoundLabel.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.RoundLabel, "Current game")
         '
         'ClearFileButton
         '
@@ -100,8 +106,9 @@ Partial Class DartGameForm
         Me.ClearFileButton.Location = New System.Drawing.Point(511, 505)
         Me.ClearFileButton.Name = "ClearFileButton"
         Me.ClearFileButton.Size = New System.Drawing.Size(275, 52)
-        Me.ClearFileButton.TabIndex = 5
+        Me.ClearFileButton.TabIndex = 2
         Me.ClearFileButton.Text = "Clear Records"
+        Me.ToolTip1.SetToolTip(Me.ClearFileButton, "Clear all records and close game")
         Me.ClearFileButton.UseVisualStyleBackColor = False
         '
         'TabControl1
@@ -144,6 +151,27 @@ Partial Class DartGameForm
         Me.TabPage2.Text = "Review"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'ReviewComboBox
+        '
+        Me.ReviewComboBox.FormattingEnabled = True
+        Me.ReviewComboBox.Location = New System.Drawing.Point(263, 426)
+        Me.ReviewComboBox.Name = "ReviewComboBox"
+        Me.ReviewComboBox.Size = New System.Drawing.Size(258, 28)
+        Me.ReviewComboBox.TabIndex = 5
+        Me.ToolTip1.SetToolTip(Me.ReviewComboBox, "Chose which dart to review")
+        '
+        'ReviewBoardButton
+        '
+        Me.ReviewBoardButton.BackColor = System.Drawing.Color.DodgerBlue
+        Me.ReviewBoardButton.ForeColor = System.Drawing.Color.Cornsilk
+        Me.ReviewBoardButton.Location = New System.Drawing.Point(6, 417)
+        Me.ReviewBoardButton.Name = "ReviewBoardButton"
+        Me.ReviewBoardButton.Size = New System.Drawing.Size(241, 133)
+        Me.ReviewBoardButton.TabIndex = 5
+        Me.ReviewBoardButton.Text = "Review Board"
+        Me.ToolTip1.SetToolTip(Me.ReviewBoardButton, "Review dart selected")
+        Me.ReviewBoardButton.UseVisualStyleBackColor = False
+        '
         'ReviewPictureBox
         '
         Me.ReviewPictureBox.BackColor = System.Drawing.Color.DarkSalmon
@@ -162,26 +190,8 @@ Partial Class DartGameForm
         Me.DisplayRecordsButton.Size = New System.Drawing.Size(241, 133)
         Me.DisplayRecordsButton.TabIndex = 2
         Me.DisplayRecordsButton.Text = "Review Records"
+        Me.ToolTip1.SetToolTip(Me.DisplayRecordsButton, "Grab file and display in message box")
         Me.DisplayRecordsButton.UseVisualStyleBackColor = False
-        '
-        'ReviewBoardButton
-        '
-        Me.ReviewBoardButton.BackColor = System.Drawing.Color.DodgerBlue
-        Me.ReviewBoardButton.ForeColor = System.Drawing.Color.Cornsilk
-        Me.ReviewBoardButton.Location = New System.Drawing.Point(6, 417)
-        Me.ReviewBoardButton.Name = "ReviewBoardButton"
-        Me.ReviewBoardButton.Size = New System.Drawing.Size(241, 133)
-        Me.ReviewBoardButton.TabIndex = 4
-        Me.ReviewBoardButton.Text = "Review Board"
-        Me.ReviewBoardButton.UseVisualStyleBackColor = False
-        '
-        'ReviewComboBox
-        '
-        Me.ReviewComboBox.FormattingEnabled = True
-        Me.ReviewComboBox.Location = New System.Drawing.Point(263, 426)
-        Me.ReviewComboBox.Name = "ReviewComboBox"
-        Me.ReviewComboBox.Size = New System.Drawing.Size(258, 28)
-        Me.ReviewComboBox.TabIndex = 5
         '
         'DartGameForm
         '
@@ -213,4 +223,5 @@ Partial Class DartGameForm
     Friend WithEvents ReviewBoardButton As Button
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents ReviewComboBox As ComboBox
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
